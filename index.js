@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const chatId = process.env.CHAT_ID;
-const url = process.env.URL;
+const url = process.env.TARGET_URL;
 const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: false });
 const app = express();
 
