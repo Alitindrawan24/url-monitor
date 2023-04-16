@@ -13,6 +13,7 @@ const app = express();
 app.listen(3000, () => console.log('Server started on port 3000'));
 
 cron.schedule(process.env.CRON_EXPRESSION, () => {
+    console.log(`Running cron on URL ${url}`);
     request(url, (error, response, body) => {
         if (error) {
             bot.sendMessage(chatId, `Error checking URL ${url}`);
