@@ -6,19 +6,24 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const chatId = process.env.CHAT_ID;
-const url = process.env.TARGET_URL;
 const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: false });
 const app = express();
 
-app.listen(3000, () => console.log('Server started on port 3000'));
-
-cron.schedule(process.env.CRON_EXPRESSION, () => {
-    console.log(`Running cron on URL ${url}`);
+app.get('/url-monitor', (req, res) => {
+    const time = new Date().getTime();
+    const { url } = req.query
+    console.log(`Running cron on URL ${url} at ${time}`);
     request(url, (error, response, body) => {
         if (error) {
-            bot.sendMessage(chatId, `Error checking URL ${url}`);
+            bot.sendMessage(chatId, `Error : The URL ${url}`);
+            res.status(500).send(`Error : The URL ${url}`)
         } else if (response.statusCode !== 200) {
-            bot.sendMessage(chatId, `URL ${url} returned HTTP ${response.statusCode}`);
+            bot.sendMessage(chatId, `Fail : The URL ${url} returned HTTP ${response.statusCode}`);
+            res.status(response.statusCode).send(`Fail : The URL ${url} returned HTTP ${response.statusCode}`)
+        } else {
+            res.send(`Success: The URL ${url} was successfully accessed.`);
         }
     });
-});
+})
+
+app.listen(3000, () => console.log('Server started on port 3000'));
