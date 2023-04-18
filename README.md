@@ -1,5 +1,5 @@
 # URL Monitor
-URL Monitor is a Node.js application that periodically checks the availability of a website URL and sends a notification to a Telegram user if the website is down. The application uses the axios library to perform an HTTP request to the URL and checks the response status code. The Telegram Bot API is used to send a notification message to the user via Telegram if the website is not responding. The application also utilizes the dotenv library to load environment variables from a .env file, which stores the Telegram bot token, chat ID, and URL to be checked.
+URL Monitor is a Node.js application that checks the availability of a website URL and sends a notification to a Telegram user if the website is down. The application uses the request library to perform an HTTP request to the URL and checks the response status code. The Telegram Bot API is used to send a notification message to the user via Telegram if the website is not responding. The application also utilizes the dotenv library to load environment variables from a .env file, which stores the Telegram bot token, chat ID, and URL to be checked.
 
 ## Tech
 - Node JS
