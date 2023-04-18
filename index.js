@@ -9,6 +9,10 @@ const chatId = process.env.CHAT_ID;
 const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: false });
 const app = express();
 
+app.get('/', (req, res) => {
+    res.send("Welcome to URL Monitor")
+})
+
 app.get('/url-monitor', (req, res) => {
     const time = new Date().getTime();
     const { url } = req.query
